@@ -21,6 +21,8 @@ public abstract class CalcPOA extends org.omg.PortableServer.Servant
     _methods.put ("div", new java.lang.Integer (1));
     _methods.put ("mul", new java.lang.Integer (2));
     _methods.put ("sub", new java.lang.Integer (3));
+    _methods.put ("mod", new java.lang.Integer (4));
+    _methods.put ("fac", new java.lang.Integer (5));
   }
 
   public org.omg.CORBA.portable.OutputStream _invoke (String $method,
@@ -78,6 +80,32 @@ public abstract class CalcPOA extends org.omg.PortableServer.Servant
          float b = in.read_float ();
          float $result = (float)0;
          $result = this.sub (a, b);
+         out = $rh.createReply();
+         out.write_float ($result);
+         break;
+       }
+
+       case 4:  // CalcApp/Calc/mod
+       {
+        try {
+          float a = in.read_float ();
+          float b = in.read_float ();
+          float $result = (float)0;
+          $result = this.mod (a, b);
+          out = $rh.createReply();
+          out.write_float ($result);
+        } catch (CalcApp.CalcPackage.DivisionByZero $ex) {
+          out = $rh.createExceptionReply ();
+          CalcApp.CalcPackage.DivisionByZeroHelper.write (out, $ex);
+        }
+        break;
+       }
+
+       case 5:  // CalcApp/Calc/fac
+       {
+         float a = in.read_float ();
+         float $result = (float)0;
+         $result = this.fac (a);
          out = $rh.createReply();
          out.write_float ($result);
          break;

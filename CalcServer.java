@@ -34,6 +34,29 @@ class CalcImpl extends CalcPOA {
     public float sub(float a, float b) {
         return a - b;
     }
+
+    @Override
+    public float mod(float a, float b) throws DivisionByZero {
+        if (b == 0) {
+            throw new CalcApp.CalcPackage.DivisionByZero();
+        } else {
+            return a % b;
+        }
+    }
+
+    @Override
+    public float fac(float a) {
+        if(a == 0)
+            return 1;
+        else{
+            int i = 1;
+            for(i = 1; i <= a; i++){
+                i *= i;
+            }
+            return i;
+        }
+    }
+
     private ORB orb;
 
     public void setORB(ORB orb_val) {
