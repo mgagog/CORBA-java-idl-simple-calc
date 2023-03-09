@@ -1,13 +1,8 @@
-
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-
 import CalcApp.*;
 import CalcApp.CalcPackage.DivisionByZero;
-
 import org.omg.CosNaming.*;
-import org.omg.CosNaming.NamingContextPackage.*;
 import org.omg.CORBA.*;
 import static java.lang.System.out;
 
@@ -35,7 +30,8 @@ public class CalcClient {
 //			System.out.println(calcImpl);
 
 
-            while (true) {
+            while (true) { //en el menú, se han añadido las opciones
+                            // para fac y mod
                 out.println("1. Sum");
                 out.println("2. Sub");
                 out.println("3. Mul");
@@ -62,13 +58,14 @@ public class CalcClient {
                         } catch (DivisionByZero de) {
                             out.println("Division by zero!!!");
                         }
-                    } else if (opt.equals("5")) {
+                    } else if (opt.equals("5")) { // condiión para el módulo, que hace un try catch
+                                                    // si la división es entre 0
                         try {
                             out.println("a%b= " + calcImpl.mod(getFloat("a"), getFloat("b")));
                         } catch (DivisionByZero de) {
                             out.println("Division by zero!!!");
                         }
-                    } else if (opt.equals("6")) {
+                    } else if (opt.equals("6")) { // condición para el factorial
                         out.println("a!= " + calcImpl.fac(getFloat("a")));
                     }
                     

@@ -1,13 +1,8 @@
-
 import CalcApp.*;
 import CalcApp.CalcPackage.DivisionByZero;
-
 import org.omg.CosNaming.*;
-import org.omg.CosNaming.NamingContextPackage.*;
 import org.omg.CORBA.*;
 import org.omg.PortableServer.*;
-
-import java.util.Properties;
 
 class CalcImpl extends CalcPOA {
 
@@ -35,7 +30,10 @@ class CalcImpl extends CalcPOA {
         return a - b;
     }
 
-    @Override
+     //se añade el funcionamiento del módulo, devolviendo
+     // a % b y añadiendo la excepción de la división entre cero
+     // como en la función div
+     @Override      
     public float mod(float a, float b) throws DivisionByZero {
         if (b == 0) {
             throw new CalcApp.CalcPackage.DivisionByZero();
@@ -44,16 +42,20 @@ class CalcImpl extends CalcPOA {
         }
     }
 
+    //se añade el funcionamiento del factorial. Este solo
+    //recibe un parámetro, y devuelve 1 si a = 0, y si no
+    //devuelve el productod e todos los números positivos
+    //que le preceden
     @Override
     public float fac(float a) {
         if(a == 0)
             return 1;
         else{
-            int i = 1;
+            int i, fac = 1;
             for(i = 1; i <= a; i++){
-                i *= i;
+                fac = fac * i;
             }
-            return i;
+            return fac;
         }
     }
 
